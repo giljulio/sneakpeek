@@ -1,13 +1,11 @@
 package com.giljulio.sneakpeek
 
 import android.content.Context
-import android.content.res.Resources
 import android.content.res.TypedArray
-import android.os.Build
+import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.support.annotation.StyleableRes
 import android.util.AttributeSet
-import android.util.TypedValue
 
 class SneakPeekTypeArray private constructor(
         private val context: Context,
@@ -17,6 +15,7 @@ class SneakPeekTypeArray private constructor(
 
     val androidNamespace = "http://schemas.android.com/apk/res/android"
     val resAutoNamespace = "http://schemas.android.com/apk/res-auto"
+    val resourceDelegate = ResourceDelegate(context)
 
     companion object {
 
@@ -39,14 +38,8 @@ class SneakPeekTypeArray private constructor(
         if (!useNativeImpl(attribute)) {
 
             // The layout might be referencing a theme attribute.
-            var resId = set.getAttributeResourceValue(androidNamespace, attribute, 0)
-            if (resId != 0) {
-                val tempValue = TypedValue()
-                if (context.theme.resolveAttribute(resId, tempValue, true)) {
-                    resId = tempValue.resourceId
-                }
-
-                return context.getString(resId)
+            if (unwrap(attribute) != 0) {
+                return context.getString(unwrap(attribute))
             }
             return set.getAttributeValue(androidNamespace, attribute)
         }
@@ -59,44 +52,34 @@ class SneakPeekTypeArray private constructor(
         if (!useNativeImpl(attribute)) {
 
             // The layout might be referencing a theme attribute.
-            try {
-                var resId = set.getAttributeResourceValue(androidNamespace, attribute, 0)
-                if (resId != 0) {
-                    val tempValue = TypedValue()
-                    if (context.theme.resolveAttribute(resId, tempValue, true)) {
-                        resId = tempValue.resourceId
-                    }
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        return context.getColor(resId)
-                    } else {
-                        return context.resources.getColor(resId, context.theme)
-                    }
-                }
-
-            } catch (e: Resources.NotFoundException) {
-
+            val attributeValue = set.getAttributeValue(androidNamespace, attribute)
+            if (!attributeValue.startsWith("#")) {
+                return resourceDelegate.getColor(unwrap(attribute))
             }
-            return set.getAttributeIntValue(androidNamespace, attribute, defValue)
+
+            return Color.parseColor(attributeValue)
         }
         return wrapped.getColor(index, defValue)
     }
 
-    /*fun <T> getValue(@StyleableRes index: Int): T {
-        val name = context.resources.getResourceEntryName(attrs[index])
-
-        if (!useNativeImpl(index)) {
-        }
-        set.getAttributeValue(androidNamespace, name)
-    }*/
 
     fun recycle() {
-
+        wrapped.recycle()
     }
 
     private fun useNativeImpl(name: String): Boolean =
             set.getAttributeValue(androidNamespace, name) == null
 
     private fun getAttributeName(index: Int) = context.resources.getResourceEntryName(attrs[index])
+
+    private fun unwrap(attribute: String?): Int {
+        val attributeValue = set.getAttributeValue(androidNamespace, attribute)
+        var resId = set.getAttributeResourceValue(androidNamespace, attribute, 0)
+        if (resId != 0) {
+            resId = resourceDelegate.unwrapAttribute(resId, attributeValue)
+            return resourceDelegate.unwrapIdentifier(resId)
+        }
+        return resId
+    }
 
 }

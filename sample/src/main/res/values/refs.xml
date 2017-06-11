@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <item name="string_ref" type="string">@string/app_name</item>
 </resources>

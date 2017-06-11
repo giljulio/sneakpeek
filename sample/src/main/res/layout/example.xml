@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    app:custom_title="@string/app_name"
-    tools:custom_background="#f0f"
-    app:custom_background="#0f0"
-    tools:custom_title="tools text"/>
+    app:custom_title="Original String"
+    tools:custom_background="?android:attr/colorActivatedHighlight"
+    app:custom_background="#00ff00"
+    tools:custom_title="@string/string_ref"/>
