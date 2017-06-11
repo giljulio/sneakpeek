@@ -1,0 +1,28 @@
+language: android
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-25.0.2
+    - extra-android-m2repository
+    - android-25
+
+jdk:
+  - oraclejdk8
+
+script:
+  - ./gradlew clean check
+
+branches:
+  except:
+    - gh-pages
+
+notifications:
+  email: false
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.gradle
