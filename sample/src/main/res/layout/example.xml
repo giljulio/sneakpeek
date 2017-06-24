@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
+    tools:textColor="#2d2d2d"
+    android:textColor="#fff"
     app:custom_title="Original String"
     tools:custom_background="?android:attr/colorActivatedHighlight"
     app:custom_background="#00ff00"
