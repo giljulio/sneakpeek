@@ -11,14 +11,10 @@ SneakPeekTypedArray.obtainStyledAttributes(view, R.styeable.LabelTextLayout, att
 You can override `apps` namespace with a `tools` namespace just as if you were working with `android` namespace.
 ```
 <com.example.widget.LabelTextLayout
-
         ...
-        
         app:label="Username"
         tools:label="Preview username label"
-        
         ...
-        
         />        
 ```
 
