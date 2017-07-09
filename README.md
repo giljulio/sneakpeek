@@ -22,7 +22,7 @@ You can override `apps` namespace with a `tools` namespace just as if you were w
 ## Install
 
 ```
-compile "com.giljulio:sneakpeek:0.1.0"
+compile "com.giljulio:sneakpeek:0.1.1"
 ```
 Snapshots of the development version are available in [Sonatype's snapshots repository](https://oss.sonatype.org/content/repositories/snapshots/).
 
