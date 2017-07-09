@@ -31,7 +31,7 @@ class PreviewTypedArray(
         return super.getText(index)
     }
 
-    override fun getString(index: Int): String {
+    override fun getString(index: Int): String? {
         val attribute = getAttributeName(index)
         if (shouldOverrideAttribute(attribute)) {
 
@@ -103,7 +103,7 @@ class PreviewTypedArray(
         return super.getColor(index, defValue)
     }
 
-    override fun getColorStateList(index: Int): ColorStateList {
+    override fun getColorStateList(index: Int): ColorStateList? {
         val attribute = getAttributeName(index)
         if (shouldOverrideAttribute(attribute)) {
             val resId = resolveResId(attribute)
@@ -186,7 +186,7 @@ class PreviewTypedArray(
         return super.getResourceId(index, defValue)
     }
 
-    override fun getDrawable(index: Int): Drawable {
+    override fun getDrawable(index: Int): Drawable? {
         val attribute = getAttributeName(index)
         if (shouldOverrideAttribute(attribute)) {
             val resId = resolveResId(attribute)

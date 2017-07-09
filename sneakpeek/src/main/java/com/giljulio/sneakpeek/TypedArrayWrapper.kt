@@ -30,7 +30,7 @@ open class TypedArrayWrapper(private val base: TypedArray): SneakPeekTypedArray 
         return base.getText(index)
     }
 
-    override fun getString(index: Int): String {
+    override fun getString(index: Int): String? {
         return base.getString(index)
     }
 
@@ -54,7 +54,7 @@ open class TypedArrayWrapper(private val base: TypedArray): SneakPeekTypedArray 
         return base.getColor(index, defValue)
     }
 
-    override fun getColorStateList(index: Int): ColorStateList {
+    override fun getColorStateList(index: Int): ColorStateList? {
         return base.getColorStateList(index)
     }
 
@@ -86,7 +86,7 @@ open class TypedArrayWrapper(private val base: TypedArray): SneakPeekTypedArray 
         return base.getResourceId(index, defValue)
     }
 
-    override fun getDrawable(index: Int): Drawable {
+    override fun getDrawable(index: Int): Drawable? {
         return base.getDrawable(index)
     }
 

@@ -57,7 +57,7 @@ interface SneakPeekTypedArray {
     /**
      * @see android.content.res.TypedArray.getString
      */
-    fun getString(@StyleableRes index: Int): String
+    fun getString(@StyleableRes index: Int): String?
 
     /**
      * @see android.content.res.TypedArray.getNonResourceString
@@ -87,7 +87,7 @@ interface SneakPeekTypedArray {
     /**
      * @see android.content.res.TypedArray.getColorStateList
      */
-    fun getColorStateList(@StyleableRes index: Int): ColorStateList
+    fun getColorStateList(@StyleableRes index: Int): ColorStateList?
 
     /**
      * @see android.content.res.TypedArray.getInteger
@@ -127,7 +127,7 @@ interface SneakPeekTypedArray {
     /**
      * @see android.content.res.TypedArray.getDrawable
      */
-    fun getDrawable(@StyleableRes index: Int): Drawable
+    fun getDrawable(@StyleableRes index: Int): Drawable?
 
     /**
      * @see android.content.res.TypedArray.getTextArray
